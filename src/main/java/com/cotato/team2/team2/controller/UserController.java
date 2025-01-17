@@ -52,8 +52,9 @@ public class UserController {
         return ResponseEntity.ok(userService.usePoint(id, sessionKey));
     }
 
-    @PostMapping("/coin")
-    public ResponseEntity<UserResponse> changeCoinToPoint(@RequestBody ChangeCoinToPointRequest request) {
-        return ResponseEntity.ok(userService.changeCoinToPoint(request.sessionKey(), request.coin()));
+    @PatchMapping("/{id}/coin")
+    public ResponseEntity<UserResponse> changeCoinToPoint(@RequestParam("id") Long id,
+                                                          @RequestBody ChangeCoinToPointRequest request) {
+        return ResponseEntity.ok(userService.changeCoinToPoint(id, request.sessionKey(), request.coin()));
     }
 }

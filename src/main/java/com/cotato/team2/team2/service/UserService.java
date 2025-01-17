@@ -54,8 +54,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse changeCoinToPoint(String sessionKey, int coin) {
+    public UserResponse changeCoinToPoint(Long id, String sessionKey, int coin) {
         User user = userCommonService.findBySessionKey(sessionKey);
+        if (!user.getId().equals(id)) {
+            throw new BusinessException(3000, "잘못된 접근입니다.");
+        }
         if (user.getCoin() < coin) {
             throw new BusinessException(3001, "코인이 부족합니다.");
         }
