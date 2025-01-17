@@ -29,6 +29,7 @@ public class UserService {
         return UserResponse.from(user);
     }
 
+    @Transactional
     public UserResponse levelUp(String sessionKey) {
         User user = userCommonService.findBySessionKeyWithPessimisticXLock(sessionKey);
         user.levelUp();
@@ -42,12 +43,25 @@ public class UserService {
         return new UsersResponse(users);
     }
 
+    @Transactional
     public UserResponse usePoint(Long id, String sessionKey) {
         User user = userCommonService.findBySessionKeyWithPessimisticXLock(sessionKey);
         if (!user.getId().equals(id)) {
             throw new BusinessException(3000, "잘못된 접근입니다.");
         }
         user.usePoint();
+        return UserResponse.from(user);
+    }
+
+    @Transactional
+    public UserResponse changeCoinToPoint(String sessionKey, int coin) {
+        User user = userCommonService.findBySessionKey(sessionKey);
+        if (user.getCoin() < coin) {
+            throw new BusinessException(3001, "코인이 부족합니다.");
+        }
+
+        user.decreaseCoin(coin);
+        user.increasePoint();
         return UserResponse.from(user);
     }
 }

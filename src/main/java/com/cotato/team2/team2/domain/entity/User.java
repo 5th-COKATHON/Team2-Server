@@ -33,6 +33,8 @@ public class User {
 
     private int level;
 
+    private int coin;
+
     @Builder
     public User(String email, String nickname, String authKey, String sessionKey, int level) {
         this.email = email;
@@ -60,5 +62,18 @@ public class User {
             throw new BusinessException(3003, "포인트가 부족합니다.");
         }
         this.userPoint -= 1;
+    }
+
+    public void decreaseCoin(int coin) {
+        if (this.coin < coin) {
+            throw new BusinessException(3004, "코인이 부족합니다.");
+        }
+        this.coin -= coin;
+    }
+
+    public void increasePoint() {
+        if (this.userPoint >= 3) {
+            throw new BusinessException(3005, "포인트는 3까지만 보유할 수 있습니다.");
+        }
     }
 }

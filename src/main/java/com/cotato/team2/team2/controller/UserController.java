@@ -1,5 +1,6 @@
 package com.cotato.team2.team2.controller;
 
+import com.cotato.team2.team2.controller.dto.ChangeCoinToPointRequest;
 import com.cotato.team2.team2.controller.dto.UserLevelUpRequest;
 import com.cotato.team2.team2.controller.dto.UserNickNameUpdateRequest;
 import com.cotato.team2.team2.controller.dto.UserResponse;
@@ -49,5 +50,10 @@ public class UserController {
     public ResponseEntity<UserResponse> usePoint(@PathVariable("id") Long id,
                                                 @RequestParam("sessionKey") String sessionKey) {
         return ResponseEntity.ok(userService.usePoint(id, sessionKey));
+    }
+
+    @PostMapping("/coin")
+    public ResponseEntity<UserResponse> changeCoinToPoint(@RequestBody ChangeCoinToPointRequest request) {
+        return ResponseEntity.ok(userService.changeCoinToPoint(request.sessionKey(), request.coin()));
     }
 }
