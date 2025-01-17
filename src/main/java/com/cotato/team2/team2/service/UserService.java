@@ -21,6 +21,7 @@ public class UserService {
     @Transactional
     public void updateNickname(String email, String nickname) {
         User user = userCommonService.findByEmail(email);
+        log.info("변경하려는 닉네임 : <{}>, <{}>", email, nickname);
         user.updateNickname(nickname);
     }
 
