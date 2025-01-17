@@ -3,7 +3,7 @@ version: '3.8'
 services:
   server:
     image: youthing/team2:1.0.2
-    container_name: team1
+    container_name: team2
     ports:
       - "8080:8080"
     environment:
