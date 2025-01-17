@@ -31,6 +31,8 @@ jobs:
           spring.datasource.username: ${{ secrets.DB_USERNAME }}
           spring.datasource.password: ${{ secrets.DB_PASSWORD }}
           spring.jpa.hibernate.ddl-auto: ${{ secrets.DDL_AUTO }}
+          spring.mail.username: ${{ secrets.SENDER_EMAIL }}
+          spring.mail.password: ${{ secrets.SENDER_PASSWORD }}
 
       # [2] 실행 권한 부여
       - name: Grant permission for gradlew
