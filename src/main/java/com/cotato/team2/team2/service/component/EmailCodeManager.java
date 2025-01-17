@@ -1,5 +1,6 @@
 package com.cotato.team2.team2.service.component;
 
+import com.cotato.team2.team2.controller.dto.VerificationResponse;
 import com.cotato.team2.team2.domain.redis.VerificationCodeRedisRepository;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class EmailCodeManager {
             builder.append(random.nextInt(CODE_BOUNDARY));
         }
         return String.valueOf(builder);
+    }
+
+    public boolean verifyCode(String email, String code) {
+        String savedCode = verificationCodeRedisRepository.getByEmail(email);
+        return savedCode.equals(code);
     }
 }

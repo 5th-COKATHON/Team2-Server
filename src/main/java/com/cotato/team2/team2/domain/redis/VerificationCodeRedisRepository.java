@@ -13,6 +13,10 @@ public class VerificationCodeRedisRepository {
     private static final String KEY_PREFIX = "$email$";
     private final RedisTemplate<String, String> redisTemplate;
 
+    public String getByEmail(String email) {
+        String queryKey = KEY_PREFIX + email;
+        return redisTemplate.opsForValue().get(queryKey);
+    }
 
     public void saveCodeWithEmail(String email, String verificationCode) {
         String saveKey = KEY_PREFIX + email;
