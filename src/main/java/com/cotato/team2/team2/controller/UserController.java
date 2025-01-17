@@ -6,9 +6,9 @@ import com.cotato.team2.team2.controller.dto.UserNickNameUpdateRequest;
 import com.cotato.team2.team2.controller.dto.UserResponse;
 import com.cotato.team2.team2.controller.dto.UsersResponse;
 import com.cotato.team2.team2.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +26,7 @@ public class UserController {
     private final UserService userService;
 
     @PatchMapping("/nickname")
-    public ResponseEntity<Void> updateNickname(@RequestBody UserNickNameUpdateRequest request) {
+    public ResponseEntity<Void> updateNickname(@RequestBody @Valid UserNickNameUpdateRequest request) {
         userService.updateNickname(request.email(), request.nickname());
         return ResponseEntity.ok().build();
     }
