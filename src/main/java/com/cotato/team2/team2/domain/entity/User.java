@@ -1,5 +1,6 @@
 package com.cotato.team2.team2.domain.entity;
 
+import com.cotato.team2.team2.exception.BusinessException;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +29,8 @@ public class User {
 
     private String sessionKey;
 
+    private int userPoint;
+
     private int level;
 
     @Builder
@@ -37,6 +40,7 @@ public class User {
         this.authKey = authKey;
         this.sessionKey = sessionKey;
         this.level = level;
+        this.userPoint = 3;
     }
 
     public void updateNickname(String nickname) {
@@ -49,5 +53,12 @@ public class User {
 
     public void levelUp() {
         this.level += 1;
+    }
+
+    public void usePoint() {
+        if (userPoint <= 0) {
+            throw new BusinessException(3003, "포인트가 부족합니다.");
+        }
+        this.userPoint -= 1;
     }
 }

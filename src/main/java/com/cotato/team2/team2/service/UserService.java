@@ -3,6 +3,7 @@ package com.cotato.team2.team2.service;
 import com.cotato.team2.team2.controller.dto.UserResponse;
 import com.cotato.team2.team2.controller.dto.UsersResponse;
 import com.cotato.team2.team2.domain.entity.User;
+import com.cotato.team2.team2.exception.BusinessException;
 import com.cotato.team2.team2.service.component.UserCommonService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,14 @@ public class UserService {
                 .map(UserResponse::from)
                 .toList();
         return new UsersResponse(users);
+    }
+
+    public UserResponse usePoint(Long id, String sessionKey) {
+        User user = userCommonService.findBySessionKeyWithPessimisticXLock(sessionKey);
+        if (!user.getId().equals(id)) {
+            throw new BusinessException(3000, "잘못된 접근입니다.");
+        }
+        user.usePoint();
+        return UserResponse.from(user);
     }
 }

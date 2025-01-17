@@ -9,6 +9,7 @@ public record UserResponse(
         Long userId,
         String email,
         String nickname,
+        int userPoint,
         int level
 ) {
     public static UserResponse from(User user) {
@@ -17,6 +18,7 @@ public record UserResponse(
                 .email(user.getEmail())
                 .nickname(user.getNickname())
                 .level(user.getLevel())
+                .userPoint(user.getUserPoint())
                 .build();
     }
 }
