@@ -1,5 +1,6 @@
 package com.cotato.team2.team2.service;
 
+import com.cotato.team2.team2.controller.dto.UserResponse;
 import com.cotato.team2.team2.domain.entity.User;
 import com.cotato.team2.team2.service.component.UserCommonService;
 import lombok.RequiredArgsConstructor;
@@ -18,5 +19,10 @@ public class UserService {
     public void updateNickname(String email, String nickname) {
         User user = userCommonService.findByEmail(email);
         user.updateNickname(nickname);
+    }
+
+    public UserResponse getUser(String sessionKey) {
+        User user = userCommonService.findBySessionKey(sessionKey);
+        return UserResponse.from(user);
     }
 }

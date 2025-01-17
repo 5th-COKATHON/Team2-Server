@@ -28,12 +28,15 @@ public class User {
 
     private String sessionKey;
 
+    private int level;
+
     @Builder
-    public User(String email, String nickname, String authKey, String sessionKey) {
+    public User(String email, String nickname, String authKey, String sessionKey, int level) {
         this.email = email;
         this.nickname = nickname;
         this.authKey = authKey;
         this.sessionKey = sessionKey;
+        this.level = level;
     }
 
     public void updateNickname(String nickname) {

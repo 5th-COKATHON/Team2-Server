@@ -3,6 +3,7 @@ package com.cotato.team2.team2.service.component;
 import com.cotato.team2.team2.domain.entity.User;
 import com.cotato.team2.team2.domain.repository.UserRepository;
 import com.cotato.team2.team2.exception.BusinessException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,11 @@ public class UserCommonService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new BusinessException(2002 ,"해당 이메일로 가입된 유저가 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 이메일로 가입된 유저가 없습니다."));
+    }
+
+    public User findBySessionKey(String sessionKey) {
+        return userRepository.findBySessionKey(sessionKey)
+                .orElseThrow(() -> new EntityNotFoundException("해당 키의 유저가 존재하지 않음"));
     }
 }
