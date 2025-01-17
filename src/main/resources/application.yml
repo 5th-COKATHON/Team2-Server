@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_PATH}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          format_sql: true
+      show-sql: true
+
+  springdoc:
+    swagger-ui:
+      enabled: true
+
+  logging:
+    level:
+      org.springframework.security: DEBUG
