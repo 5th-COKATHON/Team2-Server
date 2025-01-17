@@ -46,4 +46,8 @@ public class User {
     public void updateSessionKey(String sessionKey) {
         this.sessionKey = sessionKey;
     }
+
+    public void levelUp() {
+        this.level += 1;
+    }
 }

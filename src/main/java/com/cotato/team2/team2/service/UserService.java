@@ -25,4 +25,10 @@ public class UserService {
         User user = userCommonService.findBySessionKey(sessionKey);
         return UserResponse.from(user);
     }
+
+    public UserResponse levelUp(String sessionKey) {
+        User user = userCommonService.findBySessionKeyWithPessimisticXLock(sessionKey);
+        user.levelUp();
+        return UserResponse.from(user);
+    }
 }

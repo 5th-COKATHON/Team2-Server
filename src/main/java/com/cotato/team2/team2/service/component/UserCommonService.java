@@ -39,4 +39,9 @@ public class UserCommonService {
         return userRepository.findBySessionKey(sessionKey)
                 .orElseThrow(() -> new EntityNotFoundException("해당 키의 유저가 존재하지 않음"));
     }
+
+    public User findBySessionKeyWithPessimisticXLock(String sessionKey) {
+        return userRepository.findBySessionKeyWithPessimisticXLock(sessionKey)
+                .orElseThrow(() -> new EntityNotFoundException("해당 키의 유저가 존재하지 않음"));
+    }
 }
