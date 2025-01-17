@@ -3,6 +3,7 @@ package com.cotato.team2.team2.service;
 import com.cotato.team2.team2.controller.dto.QuestResponse;
 import com.cotato.team2.team2.controller.dto.QuestsResponse;
 import com.cotato.team2.team2.service.component.QuestCommonService;
+import com.cotato.team2.team2.util.TimeUtil;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,7 @@ public class QuestService {
     private final QuestCommonService questCommonService;
 
     public QuestsResponse getQuests() {
-        LocalDate date = LocalDate.now();
+        LocalDate date = TimeUtil.getToday();
         List<QuestResponse> responses = questCommonService.getDailyQuests(date).stream()
                 .map(QuestResponse::from)
                 .toList();
