@@ -35,4 +35,8 @@ public class User {
         this.authKey = authKey;
         this.sessionKey = sessionKey;
     }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
