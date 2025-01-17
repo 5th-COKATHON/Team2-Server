@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/me")
     public ResponseEntity<UserResponse> getUser(@RequestParam("sessionKey") String sessionKey) {
         return ResponseEntity.ok(userService.getUser(sessionKey));
     }
