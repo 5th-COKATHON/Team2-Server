@@ -1,6 +1,9 @@
 package com.cotato.team2.team2.service;
 
+import com.cotato.team2.team2.controller.dto.LoginRequest;
+import com.cotato.team2.team2.controller.dto.LoginResponse;
 import com.cotato.team2.team2.controller.dto.VerificationResponse;
+import com.cotato.team2.team2.domain.entity.User;
 import com.cotato.team2.team2.domain.enums.EmailType;
 import com.cotato.team2.team2.exception.BusinessException;
 import com.cotato.team2.team2.service.component.EmailCodeManager;
@@ -47,5 +50,17 @@ public class AuthService {
         emailSender.sendEmail(email, uuid.toString(), EmailType.SEND_PASSWORD);
 
         return VerificationResponse.from(codeManager.verifyCode(email, code));
+    }
+
+    public LoginResponse login(String email, String authKey) {
+        User user = userCommonService.findByEmail(email);
+        if(!user.getAuthKey().equals(authKey)) {
+            throw new BusinessException(2003, "인증 키가 일치하지 않습니다.");
+        }
+
+        UUID sessionKey = UUID.randomUUID();
+        user.updateSessionKey(sessionKey.toString());
+
+        return LoginRequest.from(user);
     }
 }
