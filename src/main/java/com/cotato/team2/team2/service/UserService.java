@@ -1,8 +1,10 @@
 package com.cotato.team2.team2.service;
 
 import com.cotato.team2.team2.controller.dto.UserResponse;
+import com.cotato.team2.team2.controller.dto.UsersResponse;
 import com.cotato.team2.team2.domain.entity.User;
 import com.cotato.team2.team2.service.component.UserCommonService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,5 +32,12 @@ public class UserService {
         User user = userCommonService.findBySessionKeyWithPessimisticXLock(sessionKey);
         user.levelUp();
         return UserResponse.from(user);
+    }
+
+    public UsersResponse getUsers() {
+        List<UserResponse> users = userCommonService.findAllOrderByLevelDesc().stream()
+                .map(UserResponse::from)
+                .toList();
+        return new UsersResponse(users);
     }
 }

@@ -3,6 +3,7 @@ package com.cotato.team2.team2.controller;
 import com.cotato.team2.team2.controller.dto.UserLevelUpRequest;
 import com.cotato.team2.team2.controller.dto.UserNickNameUpdateRequest;
 import com.cotato.team2.team2.controller.dto.UserResponse;
+import com.cotato.team2.team2.controller.dto.UsersResponse;
 import com.cotato.team2.team2.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,10 @@ public class UserController {
     @PostMapping("/level-up")
     public ResponseEntity<UserResponse> levelUp(@RequestBody UserLevelUpRequest request) {
         return ResponseEntity.ok(userService.levelUp(request.sessionKey()));
+    }
+
+    @GetMapping
+    public ResponseEntity<UsersResponse> getUsers() {
+        return ResponseEntity.ok(userService.getUsers());
     }
 }

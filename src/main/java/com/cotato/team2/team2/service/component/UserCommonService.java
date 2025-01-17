@@ -4,6 +4,7 @@ import com.cotato.team2.team2.domain.entity.User;
 import com.cotato.team2.team2.domain.repository.UserRepository;
 import com.cotato.team2.team2.exception.BusinessException;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -43,5 +44,9 @@ public class UserCommonService {
     public User findBySessionKeyWithPessimisticXLock(String sessionKey) {
         return userRepository.findBySessionKeyWithPessimisticXLock(sessionKey)
                 .orElseThrow(() -> new EntityNotFoundException("해당 키의 유저가 존재하지 않음"));
+    }
+
+    public List<User> findAllOrderByLevelDesc() {
+        return userRepository.findAllByOrderByLevelDesc();
     }
 }
