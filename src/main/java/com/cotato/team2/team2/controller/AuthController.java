@@ -27,7 +27,7 @@ public class AuthController {
     }
 
     @GetMapping("/verify/email")
-    public ResponseEntity<VerificationResponse> verifyEmail(@RequestParam String email, @RequestParam String code)
+    public ResponseEntity<VerificationResponse> verifyEmail(@RequestParam("email") String email, @RequestParam("code") String code)
             throws MessagingException {
         return ResponseEntity.ok(authService.verifyEmailAndCreateUser(email, code));
     }

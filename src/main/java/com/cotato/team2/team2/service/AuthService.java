@@ -14,6 +14,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -52,6 +53,7 @@ public class AuthService {
         return VerificationResponse.from(codeManager.verifyCode(email, code));
     }
 
+    @Transactional
     public LoginResponse login(String email, String authKey) {
         User user = userCommonService.findByEmail(email);
         if(!user.getAuthKey().equals(authKey)) {
