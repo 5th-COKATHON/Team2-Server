@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
-        info = @Info(title = "Team2 API 명세서", description = "YOUTH_DEV_SWAGGER 명세서", version = "v1")
+        info = @Info(title = "Team2_API_명세서", description = "YOUTH_DEV_SWAGGER 명세서", version = "v1")
 )
 @Configuration
 public class SwaggerConfig {
@@ -17,7 +17,7 @@ public class SwaggerConfig {
         String[] paths = {"/api/**"};
 
         return GroupedOpenApi.builder()
-                .group("스웨거 테스트 API v1")  // 그룹 이름을 설정한다.
+                .group("swagger-test")  // 그룹 이름을 설정한다.
                 .pathsToMatch(paths)     // 그룹에 속하는 경로 패턴을 지정한다.
                 .build();
     }
