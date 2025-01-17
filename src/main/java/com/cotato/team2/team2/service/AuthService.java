@@ -34,7 +34,7 @@ public class AuthService {
         }
     }
 
-    public VerificationResponse verifyEmail(String email, String code) throws MessagingException {
+    public VerificationResponse verifyEmailAndCreateUser(String email, String code) throws MessagingException {
         checkUserExist(email);
 
         if (!codeManager.verifyCode(email, code)) {
