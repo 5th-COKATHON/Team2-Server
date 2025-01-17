@@ -33,6 +33,7 @@ jobs:
           spring.jpa.hibernate.ddl-auto: ${{ secrets.DDL_AUTO }}
           spring.mail.username: ${{ secrets.SENDER_EMAIL }}
           spring.mail.password: ${{ secrets.SENDER_PASSWORD }}
+          openai.api.key: ${{ secrets.OPENAI_API_KEY }}
 
       # [2] 실행 권한 부여
       - name: Grant permission for gradlew
